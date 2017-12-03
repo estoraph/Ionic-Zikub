@@ -6,7 +6,7 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { PlayListPage } from "../pages/play-list/play-list";
+import { PlayListPageModule } from "../pages/play-list/play-list.module";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -33,7 +33,7 @@ import { DataBaseServiceProvider } from '../providers/data-base-service/data-bas
     SignupPage,
     ResetPasswordPage,
     TermsAndConditionsPage,
-    PlayListPage,
+    //PlayListPage,
     MyMenuComponent,
     HelpPage,
     ProfilePage,
@@ -41,10 +41,11 @@ import { DataBaseServiceProvider } from '../providers/data-base-service/data-bas
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    PlayListPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    //MyApp,
     TabsPage,
     HomePage,
     AboutPage,
@@ -52,7 +53,7 @@ import { DataBaseServiceProvider } from '../providers/data-base-service/data-bas
     SignupPage,
     ResetPasswordPage,
     TermsAndConditionsPage,
-    PlayListPage,
+    //PlayListPage,
     HelpPage,
     ProfilePage,
   ],
