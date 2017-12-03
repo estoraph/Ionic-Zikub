@@ -3,9 +3,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import firebase from "firebase";
 
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 //import { CONFIG } from '../../config';
 import { YouTube, SearchRequest } from 'youtube-search-google-api';
-//import moment from 'moment';
+
+import moment from 'moment';
 
 /**
  * Generated class for the PlayListPage page.
@@ -13,6 +16,11 @@ import { YouTube, SearchRequest } from 'youtube-search-google-api';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+
+const localConfigs = {
+  API_KEy: 'AIzaSyDGkjcrmfW31SJV9dYrp2tnVD_MPDbOH7w',
+  TIMEOUT: 1500
+}
 
 @IonicPage()
 @Component({
@@ -26,7 +34,9 @@ export class PlayListPage {
 
   youtubeOptions: any;
    youtube: any;
-  
+
+   videoUrl: SafeResourceUrl = null;
+
 private locked: boolean = false;
 private debug: string = '';
 
@@ -34,17 +44,13 @@ private debug: string = '';
 
   constructor(
     public alertCtrl: AlertController,
-    public navCtrl: NavController, public navParams: NavParams) {
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private domSanitizer: DomSanitizer
+  )
+  {
 
-    
-  }
 
-  initSearch() {
-    /*this.youtubeOptions = {
-      maxResults: 10,
-      key: 'AIzaSyDGkjcrmfW31SJV9dYrp2tnVD_MPDbOH7w'
-    };*/
-    this.youtube = new YouTube();
   }
 
  initializeItems() {
@@ -54,23 +60,52 @@ private debug: string = '';
     ];
   }
 
-  
 
+  createVideoLink(youtubeId: string) {
+    return "https://www.youtube.com/embed/" + youtubeId;
+  }
+
+  updateItems(videos) {
+    this.items = videos;
+  }
+
+  showVideo(item) {
+    //alert(item.videoUrl);
+    console.info(item)
+    this.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(item.videoUrl);
+  }
 
   search(val: string) {
-    //this.debug = moment(new Date);
-  this.youtube.search(new SearchRequest({
+    this.debug = moment(new Date).format();
+    new YouTube().search(new SearchRequest({
       query: {
-        key: 'AIzaSyDGkjcrmfW31SJV9dYrp2tnVD_MPDbOH7w',
+        key: localConfigs.API_KEy,
         maxResults: 50,
         order: 'viewCount',
         type: 'video',
         publishedAfter: '2017-10-01T00:00:00Z',
         q: val
       }
-    }, function(error, response, body) {
+    }, (error, response, body) => {
       // Handle the response...
-      console.log("shit", error, response, body, "shit");
+      console.log("shit", body, "shit");
+
+      const results = JSON.parse(body);
+
+      const toSend = results.items.map((item) => {
+        const { snippet } = item;
+
+        return {
+          videoId: item.id.videoId,
+          title: snippet.title,
+          shit: 'shit test>' + snippet.channelId,
+          videoUrl: this.createVideoLink(item.id.videoId),
+          photoUrl: snippet.thumbnails.medium.url,
+          publishedAt: snippet.publishedAt
+        }
+      });
+
+      this.updateItems(toSend);
     }))
   }
 
@@ -83,43 +118,19 @@ private debug: string = '';
 
     console.info('shite', val);
 
-    this.initSearch();
     if (!this.locked) {
       this.locked = true;
       setTimeout(() => {
         this.search(val);
         this.locked = false;
-      }, 3000)  
+      }, localConfigs.TIMEOUT)
     }
-    
-    /*this.youtube.search(new SearchRequest(
-    {
-      query: {
-        key: 'AIzaSyDGkjcrmfW31SJV9dYrp2tnVD_MPDbOH7w',
-        maxResults: 50,
-        order: 'viewCount',
-        type: 'video',
-        publishedAfter: '2017-10-01T00:00:00Z',
-        q: val
-      }
-    }, function(error, response, body) {
-      // Handle the response...
-      console.log("shit", error, response, body, "shit");
-    }))*/
-
-    // if the value is an empty string don't filter the items
-    /*if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }*/
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlayListPage');
 
     this.initializeItems();
-    this.initSearch();
   }
 
   createNewPlayList() : void {
