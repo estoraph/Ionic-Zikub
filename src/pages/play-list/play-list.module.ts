@@ -11,8 +11,6 @@ import { PlayListPage } from './play-list';
   imports: [
     IonicPageModule.forChild(PlayListPage),
     CommonModule
-    //YouTubeModule,
-    //SearchRequestModule
   ],
   exports: [
   	PlayListPage

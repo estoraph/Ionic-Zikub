@@ -51,7 +51,7 @@ import { DataBaseServiceProvider } from '../providers/data-base-service/data-bas
     AboutPage,
     SettingsPage,
     SignupPage,
-    ResetPasswordPage,
+    ResetPasswordPage, 
     TermsAndConditionsPage,
     //PlayListPage,
     HelpPage,

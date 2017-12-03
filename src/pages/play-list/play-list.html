@@ -22,8 +22,12 @@
         <ion-avatar item-start>
           <img src="{{item.photoUrl}}">
         </ion-avatar>
+        <ion-buttons end>
+          <button ion-button icon-only (click)="createNewPlayList()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-buttons>
         <h2>{{item.title}}</h2>
-        <p>{{item.shit}}</p>
       </ion-item>
     </ion-list>
   </div>

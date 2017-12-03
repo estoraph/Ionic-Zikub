@@ -8,8 +8,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 //import { CONFIG } from '../../config';
 import { YouTube, SearchRequest } from 'youtube-search-google-api';
 
-import moment from 'moment';
-
 /**
  * Generated class for the PlayListPage page.
  *
@@ -19,7 +17,7 @@ import moment from 'moment';
 
 const localConfigs = {
   API_KEy: 'AIzaSyDGkjcrmfW31SJV9dYrp2tnVD_MPDbOH7w',
-  TIMEOUT: 1500
+  TIMEOUT: 1000
 }
 
 @IonicPage()
@@ -55,8 +53,6 @@ private debug: string = '';
 
  initializeItems() {
     this.items = [
-      /*'Amsterdam',
-      'Bogota',*/
     ];
   }
 
@@ -76,7 +72,6 @@ private debug: string = '';
   }
 
   search(val: string) {
-    this.debug = moment(new Date).format();
     new YouTube().search(new SearchRequest({
       query: {
         key: localConfigs.API_KEy,
@@ -88,7 +83,8 @@ private debug: string = '';
       }
     }, (error, response, body) => {
       // Handle the response...
-      console.log("shit", body, "shit");
+ 
+
 
       const results = JSON.parse(body);
 
@@ -98,7 +94,6 @@ private debug: string = '';
         return {
           videoId: item.id.videoId,
           title: snippet.title,
-          shit: 'shit test>' + snippet.channelId,
           videoUrl: this.createVideoLink(item.id.videoId),
           photoUrl: snippet.thumbnails.medium.url,
           publishedAt: snippet.publishedAt
@@ -116,7 +111,6 @@ private debug: string = '';
     // set val to the value of the searchbar
     let val = ev.target.value;
 
-    console.info('shite', val);
 
     if (!this.locked) {
       this.locked = true;
