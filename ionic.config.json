@@ -1,0 +1,8 @@
+{
+  "name": "MyAppMobile",
+  "app_id": "myApp_info706",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

@@ -1,0 +1,64 @@
+<!--
+  Generated template for the SignupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Signup</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
+
+    <ion-item>
+      <ion-label stacked>Username</ion-label>
+      <ion-input formControlName="username" type="username" placeholder="Your username"
+                 [class.invalid]="!signupForm.controls.username.valid && blur">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>First Name</ion-label>
+      <ion-input formControlName="firstname" type="firstname" placeholder="Your first name"
+                 [class.invalid]="!signupForm.controls.firstname.valid && blur">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Last Name</ion-label>
+      <ion-input formControlName="lastname" type="lastname" placeholder="Your last name"
+                 [class.invalid]="!signupForm.controls.lastname.valid && blur">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input formControlName="email" type="email" placeholder="Your email address"
+                 [class.invalid]="!signupForm.controls.email.valid && blur">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Password</ion-label>
+      <ion-input formControlName="password" type="password" placeholder="Your password"
+                 [class.invalid]="!signupForm.controls.password.valid && blur">
+      </ion-input>
+    </ion-item>
+
+    <ion-item no-lines  no-padding class="custom-checkbox">
+      <ion-label >I agree <a (click)="goToTermsAndConditions()">Terms and Conditions</a></ion-label>
+      <ion-checkbox formControlName="checkbox" checked="false"
+                    [class.invalid]="!signupForm.controls.checkbox.valid && blur"></ion-checkbox>
+    </ion-item>
+
+    <button ion-button block type="submit" [disabled]="!signupForm.valid">
+      Create an Account
+    </button>
+  </form>
+</ion-content>

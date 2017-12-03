@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar no-border-top>
+    <ion-buttons start>
+      <button  ion-button icon-only solid (click)="openProfil()"><ion-icon name="contact"></ion-icon></button>
+    </ion-buttons>
+    <ion-title>Menu</ion-title>
+    <ion-buttons end>
+      <button  ion-button icon-end solid color="secondary" (click)="openHelpPage()">Help<ion-icon name="help-circle"></ion-icon></button>
+      <button ion-button icon-only (dblclick)="logoutUser()"><ion-icon name="lock"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-tabs>
+  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Play Lists" tabIcon="md-musical-notes"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Settings" tabIcon="settings"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
+</ion-tabs>
