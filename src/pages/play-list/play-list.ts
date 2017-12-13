@@ -36,7 +36,6 @@ export class PlayListPage {
    videoUrl: SafeResourceUrl = null;
 
 private locked: boolean = false;
-private debug: string = '';
 
   private dataBase = firebase.database();
 
