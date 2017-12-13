@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+import {YoutubePipe} from '..//pipes/youtube/youtube'
+import {PipesModule} from '../pipes/pipes.module'
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -33,6 +35,8 @@ import { DataBaseServiceProvider } from '../providers/data-base-service/data-bas
     SignupPage,
     ResetPasswordPage,
     TermsAndConditionsPage,
+    YoutubePipe,
+
     //PlayListPage,
     MyMenuComponent,
     HelpPage,
@@ -41,7 +45,7 @@ import { DataBaseServiceProvider } from '../providers/data-base-service/data-bas
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    PlayListPageModule
+    PlayListPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

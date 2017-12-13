@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import firebase from "firebase";
 
+
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 //import { CONFIG } from '../../config';
@@ -70,7 +71,6 @@ private locked: boolean = false;
 
   showVideo(item) {
     //alert(item.videoUrl);
-    console.info(item)
     this.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(item.videoUrl);
   }
 
