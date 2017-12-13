@@ -56,6 +56,10 @@ private debug: string = '';
     ];
   }
 
+  setVideoUrlNull(){
+    this.videoUrl = null;
+  }
+
 
   createVideoLink(youtubeId: string) {
     return "https://www.youtube.com/embed/" + youtubeId;
