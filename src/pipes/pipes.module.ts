@@ -6,3 +6,4 @@ import { YoutubePipe } from './youtube/youtube';
 	exports: [YoutubePipe]
 })
 
+export class PipesModule {}
